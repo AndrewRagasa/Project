@@ -111,11 +111,6 @@ Add-Type -AssemblyName PresentationCore, PresentationFramework
     Set-Service "DiagTrack" -StartupType Disabled
 	
         
-    #This writes the output of each key it is removing and also removes the keys listed above.
-    ForEach ($Key in $Keys) {
-        Write-Output "Removed $Key from registry"
-        Remove-Item $Key -Recurse
-    }
 
 Write-Output "Removed Weather App"
         Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -Like "Microsoft.BingWeather" } | ForEach-Object { Remove-AppxProvisionedPackage -Online -PackageName $_.PackageName }
@@ -185,3 +180,5 @@ Write-Output "Removed Weather App"
         Remove-Item $Key -Recurse
     }
 }
+
+
