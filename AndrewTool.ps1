@@ -1,7 +1,7 @@
 Enable-ComputerRestore -Drive "C:\"
 Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
-Write-Output "DrewOptimization V1.2 ** Restor Point Created"
+Write-Output "DrewOptimization V1.2 ** Restore Point Created"
 Write-Output "**"
 Write-Output "**"
 Write-Output "**"
