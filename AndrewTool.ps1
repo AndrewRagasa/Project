@@ -19,20 +19,24 @@ Add-Type -AssemblyName PresentationCore, PresentationFramework
 
 		
  #Disables scheduled tasks that are considered unnecessary 
-    Write-Output "Disabled scheduled tasks"
-    Get-ScheduledTask  XblGameSaveTaskLogon | Disable-ScheduledTask
+    
     Get-ScheduledTask  XblGameSaveTask | Disable-ScheduledTask
+	Write-Output "Disabled XblGameSaveTask"
     Get-ScheduledTask  Consolidator | Disable-ScheduledTask
+	Write-Output "Disabled ConsolidatorTask"
     Get-ScheduledTask  UsbCeip | Disable-ScheduledTask
+	Write-Output "Disabled UsbCeipTask"
     Get-ScheduledTask  DmClient | Disable-ScheduledTask
+	Write-Output "Disabled DmClientTask"
     Get-ScheduledTask  DmClientOnScenarioDownload | Disable-ScheduledTask
+	Write-Output "Disabled DmClientOnScenarioDownloadTask"
 
-    Write-Output "Stopped and Disabled Diagnostics Tracking Service"
+    
 	
 #Disabling the Diagnostics Tracking Service
     Stop-Service "DiagTrack"
     Set-Service "DiagTrack" -StartupType Disabled
-
+	Write-Output "Stopped and Disabled Diagnostics Tracking Service"
     
     Write-Output "Removed CloudStore from registry if it exists"
     $CloudStore = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CloudStore'
@@ -146,3 +150,11 @@ Write-Output "Removed Weather App"
     Set-Service "DiagTrack" -StartupType Disabled
 	Write-Output "Disabled DiagTrack"		
   
+
+chkdsk
+
+sfc /scannow
+
+DISM /Online /Cleanup-Image /CheckHealth
+
+DISM /Online /Cleanup-Image /ScanHealth
