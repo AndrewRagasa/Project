@@ -42,7 +42,7 @@ Add-Type -AssemblyName PresentationCore, PresentationFramework
     $People = 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People'
     If (Test-Path $People) {
         Set-ItemProperty $People -Name PeopleBand -Value 0
-	}
+	
 
  #Disabling Location Tracking
     Write-Output "Disabled Location Tracking"
@@ -180,5 +180,4 @@ Write-Output "Removed Weather App"
         Remove-Item $Key -Recurse
     }
 }
-
 
