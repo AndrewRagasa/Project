@@ -115,7 +115,7 @@ Add-Type -AssemblyName PresentationCore, PresentationFramework
 #Remove Background Tasks
         #"HKCR:\Extensions\ContractId\Windows.BackgroundTasks\PackageId\46928bounde.EclipseManager_2.2.4.51_neutral__a5h4egax66k6y"
 		
-	 )
+	 #)
         
     #This writes the output of each key it is removing and also removes the keys listed above.
     ForEach ($Key in $Keys) {
