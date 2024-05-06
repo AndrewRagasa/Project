@@ -35,27 +35,6 @@ Start-Transcript -OutputDirectory "$OtimizationFolder"
 
 Add-Type -AssemblyName PresentationCore, PresentationFramework
 
-Write-Output "DrewOptimization V1.2 ** Checking Disk"
-
-chkdsk
-
-Write-Output "DrewOptimization V1.2 ** Checking System Files"
-
-sfc /scannow
-
-Write-Output "DrewOptimization V1.2 ** Checking Image Status"
-
-DISM /Online /Cleanup-Image /CheckHealth
-
-Write-Output "DrewOptimization V1.2 ** Scanning Corrupted Files and Images"
-DISM /Online /Cleanup-Image /ScanHealth
-
-
-Write-Output "DrewOptimization V1.2 ** Fixing Corrupted Files and Images"
-DISM /Online /Cleanup-Image /RestoreHealth
-
-Write-Output "**"
-Write-Output "**"
 		
  #Disables scheduled tasks that are considered unnecessary 
     
@@ -231,6 +210,11 @@ Write-Output "DrewOptimization V1.2 ** Removed Weather App"
 #Disabling the Diagnostics Tracking Service
     Stop-Service "DiagTrack"
     Set-Service "DiagTrack" -StartupType Disabled
+
+
+	Write-Output "**"
+	Write-Output "**"
+	Write-Output "**"
 	Write-Output "DrewOptimization V1.2 ** Disabled DiagTrack"		
   
 
