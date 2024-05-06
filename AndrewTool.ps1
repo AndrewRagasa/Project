@@ -185,8 +185,6 @@ Write-Output "DrewOptimization V1.2 ** Scanning Corrupted Files and Images"
 DISM /Online /Cleanup-Image /ScanHealth
 
 
-Write-Output "DrewOptimization V1.2 ** Fixing Corrupted Files and Images"
-DISM /Online /Cleanup-Image /RestoreHealth
 
   
 
