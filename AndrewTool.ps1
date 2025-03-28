@@ -185,6 +185,6 @@ Write-Output "DrewOptimization V1.2 ** Scanning Corrupted Files and Images"
 DISM /Online /Cleanup-Image /ScanHealth
 
 
-Read-Host -Prompt "Optimization Complete - You can close the window"
+Read-Host -Prompt "AndrewRagasa Optimization Tool™ Complete - You can close the window "
   
 
