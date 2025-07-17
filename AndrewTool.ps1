@@ -1,3 +1,4 @@
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 Enable-ComputerRestore -Drive "C:\"
 Checkpoint-Computer -Description "RestorePoint1" -RestorePointType "MODIFY_SETTINGS"
 
@@ -43,25 +44,10 @@ Add-Type -AssemblyName PresentationCore, PresentationFramework
     
 	
 #Disabling the Diagnostics Tracking Service
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
-}
-$isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
-$isManaged = $isDomainJoined -or $aadJoined
-Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
-if ($isManaged) {
-    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
-} else {
     Stop-Service "DiagTrack"
     Set-Service "DiagTrack" -StartupType Disabled
 	Write-Output "DrewOptimization V1.2 ** Stopped and Disabled Diagnostics Tracking Service"
 	
-}
     
     Write-Output "DrewOptimization V1.2 ** Removed CloudStore from registry if it exists"
     $CloudStore = 'HKCU:\Software\Microsoft\Windows\CurrentVersion\CloudStore'
@@ -74,20 +60,6 @@ if ($isManaged) {
         Set-ItemProperty $People -Name PeopleBand -Value 0
 	}	
 
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
-}
-$isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
-$isManaged = $isDomainJoined -or $aadJoined
-Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
-if ($isManaged) {
-    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
-} else {
 #Disabling Location Tracking
     Write-Output "DrewOptimization V1.2 **  Disabled Location Tracking"
     $SensorState = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Sensor\Overrides\{BFA794E4-F964-4FDB-90F6-51056BFE4B44}"
@@ -101,27 +73,12 @@ if ($isManaged) {
     }
     Set-ItemProperty $LocationConfig Status -Value 0 
 
-}
 #Turns off Data Collection via the AllowTelemtry key by changing it to 0
     Write-Output "DrewOptimization V1.2 ** Turned off Data Collection"
     $DataCollection1 = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection"
     $DataCollection2 = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
     $DataCollection3 = "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection"    
     If (Test-Path $DataCollection1) {
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
-}
-$isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
-$isManaged = $isDomainJoined -or $aadJoined
-Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
-if ($isManaged) {
-    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
-} else {
         Set-ItemProperty $DataCollection1  AllowTelemetry -Value 0 
     }
     If (Test-Path $DataCollection2) {
@@ -131,24 +88,9 @@ if ($isManaged) {
         Set-ItemProperty $DataCollection3  AllowTelemetry -Value 0 
     }
 
-}
 #Disables Wi-fi Sense
     Write-Output "DrewOptimization V1.2 ** Disabled Wi-Fi Sense"
     $WifiSense1 = "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting"
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
-}
-$isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
-$isManaged = $isDomainJoined -or $aadJoined
-Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
-if ($isManaged) {
-    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
-} else {
     $WifiSense2 = "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots"
     $WifiSense3 = "HKLM:\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config"
     If (!(Test-Path $WifiSense1)) {
@@ -161,41 +103,11 @@ if ($isManaged) {
     Set-ItemProperty $WifiSense2  Value -Value 0 
     Set-ItemProperty $WifiSense3  AutoConnectAllowedOEM -Value 0 
 
-}
 	
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
-}
-$isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
-$isManaged = $isDomainJoined -or $aadJoined
-Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
-if ($isManaged) {
-    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
-} else {
  #Stops the Windows Feedback Experience from sending anonymous data
     Write-Output "DrewOptimization V1.2 ** Stopped the Windows Feedback Experience program"
     $Period = "HKCU:\Software\Microsoft\Siuf\Rules"
 
-}
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
-}
-$isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
-$isManaged = $isDomainJoined -or $aadJoined
-Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
-if ($isManaged) {
-    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
-} else {
 #Disables Windows Feedback Experience
     Write-Output "DrewOptimization V1.2 ** Disabled Windows Feedback Experience program"
     $Advertising = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\AdvertisingInfo"
@@ -203,21 +115,6 @@ if ($isManaged) {
         Set-ItemProperty $Advertising Enabled -Value 0 
     }
 
-}
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
-}
-$isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
-$isManaged = $isDomainJoined -or $aadJoined
-Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
-if ($isManaged) {
-    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
-} else {
 #Stops Cortana from being used as part of your Windows Search Function
     Write-Output "DrewOptimization V1.2 ** Stopped Cortana from being used as part of your Windows Search Function"
     $Search = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\Windows Search"
@@ -225,7 +122,6 @@ if ($isManaged) {
         Set-ItemProperty $Search AllowCortana -Value 0 
     }
 
-}
         
 
 Write-Output "DrewOptimization V1.2 ** Removed Weather App"
@@ -269,25 +165,10 @@ Write-Output "DrewOptimization V1.2 ** Removed Weather App"
 		Write-Output "DrewOptimization V1.2 ** Disabled UnistoreSvc"
 		
 #Disabling the Diagnostics Tracking Service
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
-}
-$isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
-$isManaged = $isDomainJoined -or $aadJoined
-Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
-if ($isManaged) {
-    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
-} else {
     Stop-Service "DiagTrack"
     Set-Service "DiagTrack" -StartupType Disabled
 	Write-Output "DrewOptimization V1.2 ** Disabled DiagTrack"		
 
-}
 
 Write-Output "DrewOptimization V1.2 ** Checking Disk"
 
@@ -307,11 +188,3 @@ DISM /Online /Cleanup-Image /ScanHealth
 Write-Output "  "
 Write-Output "AndrewRagasa Optimization Tool is Complete - You can close this window "
   
-
-Write-Output "DrewOptimization V1.2 ** Optimization Summary"
-if ($isManaged) {
-    Write-Output "✔ Managed device detected — telemetry and privacy tweaks were skipped."
-} else {
-    Write-Output "✔ Telemetry and privacy optimizations were applied."
-}
-Write-Output "✔ Other system optimizations (e.g., app removals, service tweaks) were applied."
