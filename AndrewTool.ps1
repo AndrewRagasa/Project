@@ -291,7 +291,7 @@ if ($isManaged) {
 
 Write-Output "DrewOptimization V1.2 ** Checking Disk"
 
-chkdsk /f
+chkdsk
 
 Write-Output "DrewOptimization V1.2 ** Checking System Files"
 
