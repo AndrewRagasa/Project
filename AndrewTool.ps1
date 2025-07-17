@@ -292,29 +292,17 @@ if ($isManaged) {
 Write-Output "DrewOptimization V1.2 ** Checking Disk"
 
 chkdsk
-if ($LASTEXITCODE -ne 0) {
-    Write-Output "DrewOptimization V1.2 ** Issues were detected. It is recommended to run 'chkdsk /f' or appropriate repair commands."
-}
 
 Write-Output "DrewOptimization V1.2 ** Checking System Files"
 
 sfc /scannow
-if ($LASTEXITCODE -ne 0) {
-    Write-Output "DrewOptimization V1.2 ** Issues were detected. It is recommended to run 'chkdsk /f' or appropriate repair commands."
-}
 
 Write-Output "DrewOptimization V1.2 ** Checking Image Status"
 
 DISM /Online /Cleanup-Image /CheckHealth
-if ($LASTEXITCODE -ne 0) {
-    Write-Output "DrewOptimization V1.2 ** Issues were detected. It is recommended to run 'chkdsk /f' or appropriate repair commands."
-}
 
 Write-Output "DrewOptimization V1.2 ** Scanning Corrupted Files and Images"
 DISM /Online /Cleanup-Image /ScanHealth
-if ($LASTEXITCODE -ne 0) {
-    Write-Output "DrewOptimization V1.2 ** Issues were detected. It is recommended to run 'chkdsk /f' or appropriate repair commands."
-}
 
 Write-Output "  "
 Write-Output "AndrewRagasa Optimization Tool is Complete - You can close this window "
@@ -322,7 +310,7 @@ Write-Output "AndrewRagasa Optimization Tool is Complete - You can close this wi
 
 Write-Output "DrewOptimization V1.2 ** Optimization Summary"
 if ($isManaged) {
-    Write-Output "[✓] Managed device detected — telemetry and privacy tweaks were skipped."
+    Write-Output "[OK] Managed device detected — telemetry and privacy tweaks were skipped."
 Write-Output "DrewOptimization V1.2 ** Detailed Summary Log"
 Write-Output "Disabled Services:"
 Write-Output "Set-Service "DiagTrack" -StartupType Disabled"
@@ -359,6 +347,6 @@ Write-Output "Set-ItemProperty $Advertising Enabled -Value 0"
 Write-Output "Set-ItemProperty $Search AllowCortana -Value 0"
 Write-Output "Summary log saved to: C:\\Temp\\AndrewRagasaTool\\OptimizationSummary.log"
 } else {
-    Write-Output "[✓] Telemetry and privacy optimizations were applied."
+    Write-Output "[OK] Telemetry and privacy optimizations were applied."
 }
-Write-Output "[✓] Personal system optimizations (e.g., app removals, service tweaks) were applied."
+Write-Output "[OK] Personal system optimizations (e.g., app removals, service tweaks) were applied."
