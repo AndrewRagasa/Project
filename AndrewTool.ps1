@@ -28,6 +28,13 @@ Else {
 		}
 
 Start-Transcript -OutputDirectory "$OtimizationFolder"
+$dsregStatus = dsregcmd /status
+$aadJoined = $false
+foreach ($line in $dsregStatus) {
+    if ($line -match 'AzureADJoined\s*:\s*YES') {
+        $aadJoined = $true
+        break
+    }
 
 Add-Type -AssemblyName PresentationCore, PresentationFramework
 
@@ -57,13 +64,6 @@ $log += "$($_)"
     
 	
 #Disabling the Diagnostics Tracking Service
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
 }
 $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
@@ -90,14 +90,6 @@ $log += "$($_)"
         Set-ItemProperty $People -Name PeopleBand -Value 0
 	}	
 
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
-}
 $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
 Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
@@ -124,13 +116,6 @@ if ($isManaged) {
     $DataCollection2 = "HKLM:\SOFTWARE\Policies\Microsoft\Windows\DataCollection"
     $DataCollection3 = "HKLM:\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Policies\DataCollection"    
     If (Test-Path $DataCollection1) {
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
 }
 $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
@@ -147,19 +132,10 @@ if ($isManaged) {
         Set-ItemProperty $DataCollection3  AllowTelemetry -Value 0 
     }
 
-}
 #Disables Wi-fi Sense
     Write-Output "DrewOptimization V1.2 ** Disabled Wi-Fi Sense"
 $log += "$($_)"
     $WifiSense1 = "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowWiFiHotSpotReporting"
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
-}
 $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
 Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
@@ -180,14 +156,6 @@ if ($isManaged) {
 
 }
 	
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
-}
 $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
 Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
@@ -198,14 +166,6 @@ if ($isManaged) {
     Write-Output "DrewOptimization V1.2 ** Stopped the Windows Feedback Experience program"
     $Period = "HKCU:\Software\Microsoft\Siuf\Rules"
 
-}
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
 }
 $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
@@ -221,14 +181,6 @@ $log += "$($_)"
         Set-ItemProperty $Advertising Enabled -Value 0 
     }
 
-}
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
 }
 $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
@@ -297,14 +249,6 @@ $log += "$($_)"
 $log += "$($_)"
 		
 #Disabling the Diagnostics Tracking Service
-$dsregStatus = dsregcmd /status
-$aadJoined = $false
-foreach ($line in $dsregStatus) {
-    if ($line -match 'AzureADJoined\s*:\s*YES') {
-        $aadJoined = $true
-        break
-    }
-}
 $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
 Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
