@@ -292,17 +292,29 @@ if ($isManaged) {
 Write-Output "DrewOptimization V1.2 ** Checking Disk"
 
 chkdsk
+if ($LASTEXITCODE -ne 0) {
+    Write-Output "DrewOptimization V1.2 ** Issues were detected. It is recommended to run 'chkdsk /f' or appropriate repair commands."
+}
 
 Write-Output "DrewOptimization V1.2 ** Checking System Files"
 
 sfc /scannow
+if ($LASTEXITCODE -ne 0) {
+    Write-Output "DrewOptimization V1.2 ** Issues were detected. It is recommended to run 'chkdsk /f' or appropriate repair commands."
+}
 
 Write-Output "DrewOptimization V1.2 ** Checking Image Status"
 
 DISM /Online /Cleanup-Image /CheckHealth
+if ($LASTEXITCODE -ne 0) {
+    Write-Output "DrewOptimization V1.2 ** Issues were detected. It is recommended to run 'chkdsk /f' or appropriate repair commands."
+}
 
 Write-Output "DrewOptimization V1.2 ** Scanning Corrupted Files and Images"
 DISM /Online /Cleanup-Image /ScanHealth
+if ($LASTEXITCODE -ne 0) {
+    Write-Output "DrewOptimization V1.2 ** Issues were detected. It is recommended to run 'chkdsk /f' or appropriate repair commands."
+}
 
 Write-Output "  "
 Write-Output "AndrewRagasa Optimization Tool is Complete - You can close this window "
