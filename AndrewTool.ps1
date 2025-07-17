@@ -18,12 +18,14 @@ If (Test-Path $OtimizationFolder) {
     Write-Output "$OtimizationFolder exists. Skipping."
 
 	
+}
 Else {
     Write-Output "The folder '$OtimizationFolder' doesn't exist. This folder will be used for storing logs created after the script runs. Creating now."
     Start-Sleep 1
     New-Item -Path "$OtimizationFolder" -ItemType Directory
     Write-Output "DrewOptimization V1.2 ** The folder $OtimizationFolder was successfully created."
 
+		}
 
 Start-Transcript -OutputDirectory "$OtimizationFolder"
 
@@ -86,6 +88,7 @@ $log += "$($_)"
     $People = 'HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People'
     If (Test-Path $People) {
         Set-ItemProperty $People -Name PeopleBand -Value 0
+	}	
 
 $dsregStatus = dsregcmd /status
 $aadJoined = $false
@@ -111,8 +114,10 @@ if ($isManaged) {
     Set-ItemProperty $SensorState SensorPermissionState -Value 0 
     If (!(Test-Path $LocationConfig)) {
         New-Item $LocationConfig
+    }
     Set-ItemProperty $LocationConfig Status -Value 0 
 
+}
 #Turns off Data Collection via the AllowTelemtry key by changing it to 0
     Write-Output "DrewOptimization V1.2 ** Turned off Data Collection"
     $DataCollection1 = "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection"
@@ -137,9 +142,12 @@ if ($isManaged) {
     }
     If (Test-Path $DataCollection2) {
         Set-ItemProperty $DataCollection2  AllowTelemetry -Value 0 
+    }
     If (Test-Path $DataCollection3) {
         Set-ItemProperty $DataCollection3  AllowTelemetry -Value 0 
+    }
 
+}
 #Disables Wi-fi Sense
     Write-Output "DrewOptimization V1.2 ** Disabled Wi-Fi Sense"
 $log += "$($_)"
@@ -166,9 +174,11 @@ if ($isManaged) {
     Set-ItemProperty $WifiSense1  Value -Value 0 
     If (!(Test-Path $WifiSense2)) {
         New-Item $WifiSense2
+    }
     Set-ItemProperty $WifiSense2  Value -Value 0 
     Set-ItemProperty $WifiSense3  AutoConnectAllowedOEM -Value 0 
 
+}
 	
 $dsregStatus = dsregcmd /status
 $aadJoined = $false
@@ -211,6 +221,7 @@ $log += "$($_)"
         Set-ItemProperty $Advertising Enabled -Value 0 
     }
 
+}
 $dsregStatus = dsregcmd /status
 $aadJoined = $false
 foreach ($line in $dsregStatus) {
@@ -232,6 +243,7 @@ if ($isManaged) {
         Set-ItemProperty $Search AllowCortana -Value 0 
     }
 
+}
         
 
 Write-Output "DrewOptimization V1.2 ** Removed Weather App"
