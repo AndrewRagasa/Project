@@ -55,7 +55,7 @@ $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
 Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
 if ($isManaged) {
-Write-Output "🔒 Managed device detected (Domain or Azure AD joined) — telemetry and privacy tweaks will be skipped."
+    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
 } else {
     Stop-Service "DiagTrack"
     Set-Service "DiagTrack" -StartupType Disabled
@@ -86,7 +86,7 @@ $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
 Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
 if ($isManaged) {
-Write-Output "🔒 Managed device detected (Domain or Azure AD joined) — telemetry and privacy tweaks will be skipped."
+    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
 } else {
 #Disabling Location Tracking
     Write-Output "DrewOptimization V1.2 **  Disabled Location Tracking"
@@ -120,7 +120,7 @@ $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
 Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
 if ($isManaged) {
-Write-Output "🔒 Managed device detected (Domain or Azure AD joined) — telemetry and privacy tweaks will be skipped."
+    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
 } else {
         Set-ItemProperty $DataCollection1  AllowTelemetry -Value 0 
     }
@@ -147,7 +147,7 @@ $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
 Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
 if ($isManaged) {
-Write-Output "🔒 Managed device detected (Domain or Azure AD joined) — telemetry and privacy tweaks will be skipped."
+    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
 } else {
     $WifiSense2 = "HKLM:\SOFTWARE\Microsoft\PolicyManager\default\WiFi\AllowAutoConnectToWiFiSenseHotspots"
     $WifiSense3 = "HKLM:\SOFTWARE\Microsoft\WcmSvc\wifinetworkmanager\config"
@@ -175,7 +175,7 @@ $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
 Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
 if ($isManaged) {
-Write-Output "🔒 Managed device detected (Domain or Azure AD joined) — telemetry and privacy tweaks will be skipped."
+    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
 } else {
  #Stops the Windows Feedback Experience from sending anonymous data
     Write-Output "DrewOptimization V1.2 ** Stopped the Windows Feedback Experience program"
@@ -194,7 +194,7 @@ $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
 Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
 if ($isManaged) {
-Write-Output "🔒 Managed device detected (Domain or Azure AD joined) — telemetry and privacy tweaks will be skipped."
+    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
 } else {
 #Disables Windows Feedback Experience
     Write-Output "DrewOptimization V1.2 ** Disabled Windows Feedback Experience program"
@@ -216,7 +216,7 @@ $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
 Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
 if ($isManaged) {
-Write-Output "🔒 Managed device detected (Domain or Azure AD joined) — telemetry and privacy tweaks will be skipped."
+    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
 } else {
 #Stops Cortana from being used as part of your Windows Search Function
     Write-Output "DrewOptimization V1.2 ** Stopped Cortana from being used as part of your Windows Search Function"
@@ -281,7 +281,7 @@ $isDomainJoined = (Get-WmiObject -Class Win32_ComputerSystem).PartOfDomain
 $isManaged = $isDomainJoined -or $aadJoined
 Write-Output "DrewOptimization V1.2 ** Domain Joined: $isDomainJoined, AzureAD Joined: $aadJoined"
 if ($isManaged) {
-Write-Output "🔒 Managed device detected (Domain or Azure AD joined) — telemetry and privacy tweaks will be skipped."
+    Write-Output "DrewOptimization V1.2 ** Managed device detected — skipping telemetry and privacy optimizations."
 } else {
     Stop-Service "DiagTrack"
     Set-Service "DiagTrack" -StartupType Disabled
@@ -310,8 +310,8 @@ Write-Output "AndrewRagasa Optimization Tool is Complete - You can close this wi
 
 Write-Output "DrewOptimization V1.2 ** Optimization Summary"
 if ($isManaged) {
-Write-Output "🔒 Managed device detected (Domain or Azure AD joined) — telemetry and privacy tweaks will be skipped."
+    Write-Output "[✓] Managed device detected — telemetry and privacy tweaks were skipped."
 } else {
-Write-Output "🧑‍💻 Personal device detected — applying full optimization including telemetry and privacy tweaks."
+    Write-Output "[✓] Telemetry and privacy optimizations were applied."
 }
-Write-Output "✔ Other system optimizations (e.g., app removals, service tweaks) were applied."
+Write-Output "[✓] Other system optimizations (e.g., app removals, service tweaks) were applied."
